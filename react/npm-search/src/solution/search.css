@@ -1,0 +1,21 @@
+.search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-input {
+    margin: 0 10px 0 10px;
+}
+
+ul li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border-radius: 5px;
+}
+
+ul li:first-child {
+    border: 1px solid darkred;
+}
