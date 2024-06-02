@@ -1,9 +1,6 @@
-import "./App.css";
-import {words} from "../words.js";
+import { words } from "./words.js";
 
 export default function FilterWords() {
-
-
     function filterWords() {
     }
 
@@ -15,7 +12,7 @@ export default function FilterWords() {
                     type="text"
                 />
             </label>
-            <input/>
+            <input />
         </form>
     );
 }

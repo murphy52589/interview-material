@@ -1,0 +1,45 @@
+{
+  "title": "Sample Drawer",
+  "sections": [
+    {
+      "id": "1",
+      "icon": "home_icon",
+      "text": "Home",
+      "subsections": [
+        {
+          "id": "1.1",
+          "icon": "sub_home_icon",
+          "text": "Sub Home 1"
+        },
+        {
+          "id": "1.2",
+          "icon": "sub_home_icon",
+          "text": "Sub Home 2"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "icon": "profile_icon",
+      "text": "Profile",
+      "subsections": []
+    },
+    {
+      "id": "3",
+      "icon": "settings_icon",
+      "text": "Settings",
+      "subsections": [
+        {
+          "id": "3.1",
+          "icon": "account_settings_icon",
+          "text": "Account Settings"
+        },
+        {
+          "id": "3.2",
+          "icon": "privacy_settings_icon",
+          "text": "Privacy Settings"
+        }
+      ]
+    }
+  ]
+}

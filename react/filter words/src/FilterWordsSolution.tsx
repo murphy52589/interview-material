@@ -1,20 +1,21 @@
-import {words} from "../words.js";
-import { useState } from "react";
+import {words} from "./words.js";
+import { FormEvent, useState } from "react";
 
 export default function  FilterWords() {
-    const [query, setQuery] = useState("");
+    const [query, setQuery] = useState<string>("");
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        if (!filterWords(query)) alert("no match");
+        if (!filterWords()) alert("no match");
         else {
-            const filteredWords = filterWords(query);
+            const filteredWords = filterWords();
             console.log(filteredWords);
         }
     };
 
     function filterWords() {
         // if query doesn't contain an asterisk, see if word matches anything in the array
+        if (!query) return words;
         if (!query.includes("*")) {
             return words.filter((word) => word === query);
         }
