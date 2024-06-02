@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 
 export default function CounterSolution() {
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState<number>(0);
 
     useEffect(() => {
         const storedCount = localStorage.getItem("count");

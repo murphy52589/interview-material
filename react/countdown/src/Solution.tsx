@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 function Solution() {
-    const [inputMinutes, setInputMinutes] = useState(0);
-    const [inputSeconds, setInputSeconds] = useState(0);
-    const [minutes, setMinutes] = useState(0);
-    const [seconds, setSeconds] = useState(0);
-    const [running, setRunning] = useState(false);
-    const [reset, setReset] = useState(false);
-    const intervalRef = useRef(null);
+    const [inputMinutes, setInputMinutes] = useState<number>(0);
+    const [inputSeconds, setInputSeconds] = useState<number>(0);
+    const [minutes, setMinutes] = useState<number>(0);
+    const [seconds, setSeconds] = useState<number>(0);
+    const [running, setRunning] = useState<boolean>(false);
+    const [reset, setReset] = useState<boolean>(false);
+    const intervalRef = useRef<number | undefined>(undefined);
 
     const updateTimer = () => {
         setSeconds(previousSeconds => {
@@ -37,9 +37,9 @@ function Solution() {
         clearInterval(intervalRef.current);
         setRunning(false);
 
-        let totalSeconds = inputMinutes * 60 + inputSeconds;
-        let minutesToSet = Math.floor(totalSeconds / 60);
-        let secondsToSet = totalSeconds % 60;
+        const totalSeconds = inputMinutes * 60 + inputSeconds;
+        const minutesToSet = Math.floor(totalSeconds / 60);
+        const secondsToSet = totalSeconds % 60;
 
         setMinutes(minutesToSet);
         setSeconds(secondsToSet);
@@ -84,7 +84,7 @@ function Solution() {
             <button onClick={pauseOrResume}>PAUSE / RESUME</button>
             <button onClick={onReset}>RESET</button>
 
-            <h1 data-testid="running-clock">{formatClock}</h1>
+            <h1 data-testid="running-clock">{formatClock()}</h1>
         </>
     );
 }
