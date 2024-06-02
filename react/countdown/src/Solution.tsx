@@ -1,14 +1,27 @@
 import { useState, useEffect, useRef } from 'react';
 
 function Solution() {
+    // these hold the values entered by the user in the minutes and seconds input fields
     const [inputMinutes, setInputMinutes] = useState<number>(0);
     const [inputSeconds, setInputSeconds] = useState<number>(0);
+
+    // these hold the current countdown time
     const [minutes, setMinutes] = useState<number>(0);
     const [seconds, setSeconds] = useState<number>(0);
+
+    // this boolean indicates whether the countdown is running
     const [running, setRunning] = useState<boolean>(false);
+
+    // this is a boolean that toggles when the reset button is clicked
     const [reset, setReset] = useState<boolean>(false);
+
+    // useRef is used to hold a mutable value that persists for the lifetime of the component.
+    // useRef doesn't cause re-renders when the value changes, unlike state.
+    // In this case, it is used to hold the interval ID of the countdown timer.
     const intervalRef = useRef<number | undefined>(undefined);
 
+    // this function is called every second when the countdown is running.
+    // it decrements the seconds, and if the seconds reach 0, it decrements the minutes
     const updateTimer = () => {
         setSeconds(previousSeconds => {
             if (previousSeconds === 0) {
@@ -25,6 +38,9 @@ function Solution() {
         });
     };
 
+    // This hook is used to start the countdown when the running state is true.
+    // It sets an interval that calls updateTimer every second.
+    // The interval is cleared when the component unmounts or when the running, minutes, or reset state changes
     useEffect(() => {
         if (running) {
             intervalRef.current = setInterval(updateTimer, 1000);
@@ -33,6 +49,9 @@ function Solution() {
         return () => clearInterval(intervalRef.current);
     }, [running, minutes, reset]);
 
+    // This function is called when the start button is clicked.
+    // It calculates the total seconds from the input minutes and seconds,
+    // sets the minutes and seconds state with the calculated values, and starts the countdown.
     const start = () => {
         clearInterval(intervalRef.current);
         setRunning(false);
@@ -47,8 +66,12 @@ function Solution() {
         setReset(prevReset => !prevReset);
     };
 
+    // This function is called when the pause/resume button is clicked.
+    // It toggles the running state, effectively pausing or resuming the countdown.
     const pauseOrResume = () => setRunning(!running);
 
+    // This function is called when the reset button is clicked.
+    // It stops the countdown and resets all the state variables to their initial values
     const onReset = () => {
         setRunning(false);
         setInputMinutes(0);
@@ -57,6 +80,7 @@ function Solution() {
         setSeconds(0);
     };
 
+    // This function formats the minutes and seconds state into a string in the mm:ss format
     const formatClock = () => {
         return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
     }

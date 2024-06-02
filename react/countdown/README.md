@@ -1,30 +1,53 @@
-# React + TypeScript + Vite
+# Countdown
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## This challenge was a 60 minute Codility assessment
 
-Currently, two official plugins are available:
+Your task is to implement a React component that renders a running clock that will count down time until it reaches 0 minutes and 0 seconds (00:00).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Functionality
 
-## Expanding the ESLint configuration
+### Given the HTML structure:
+```html
+<label>
+    <input type="number" />
+    Minutes
+</label>
+<label>
+	<input type="number" />
+	Seconds
+</label>
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+<button>Start</button>
+<button>Pause / resume</button>
+<button>Reset</button>
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+<h1 data-testid="running-clock">00:00</h1>
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Implement a running clock that receives its time value from user inputs and allows the user to start, pause/resume the countdown and reset the clock
+
+In order to satisfy the task's requirements, you need to implement the following:
+1. Time display
+    1. Time is displayed in `<h1 data-testid="running-clock">00:00</h1>` and its initial value is `00:00`
+    2. Time is displayed in the format `mm:ss` (minutes:seconds)
+    3. 1 minute, 5 seconds should be displayed as `01:05`
+    4. 1 minute, 65 seconds should be displayed as `02:05`
+2. Inputs
+    1. Changing the input values does not change the value displayed in `<h1 data-testid="running-clock">00:00</h1>`
+    2. Inputs do not need to have `max` or `min` values
+    3. The clock doesn't need to handle negative values
+3. Behavior
+    1. On a `start` button click, set the clock displayed in `<h1 data-testid="running-clock">00:00</h1>` with the time calculated from the inputs and start counting down
+    2. Once the clock is running, update the displayed time every second
+    3. Once the clock is running and the `start` button is clicked, restart the clock with the same time originally provided in the inputs
+    4. Once the countdown is done and the clock reaches `00:00`, stop counting and keep displaying `00:00`
+    5. On a `paurse/resume` button click, pause or resume the clock appropriately
+        1. `pause` puts the countdown on hold
+        2. `resume` continues the countdown from where it was paused
+    6. On a `reset` click, both inputs should be reset to `0`
+    7. Once the `reset` button is clicked, the time displayed in `<h1 data-testid="running-clock">00:00</h1>` should be reset to `00:00`
+
+### Implementation hints and notices:
+- Do not clear the inputs on a `start` button click
+- Use the same button element for both pause and resume actions
+

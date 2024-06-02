@@ -5,6 +5,6 @@ import Starter from './Starter'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <Starter />
+    <Solution />
   </React.StrictMode>,
 )
