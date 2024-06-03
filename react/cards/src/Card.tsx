@@ -4,7 +4,7 @@ export interface ICard {
 
 }
 
-export const Card = ({ suit, rank }: CardProps) => {
+export const Card = ({ suit, rank }: ICard) => {
   return (
       <div
           className="card"

@@ -1,18 +1,25 @@
 import React, { useState } from "react";
-import { fetchPackages } from "./search.api.js";
+import { fetchPackages } from "./search.api";
 import "./search.css";
 
-export default function Search() {
-    const [searchInput, setSearchInput] = useState("");
-    const [packages, setPackages] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(false);
+export interface NpmPackage {
+    name: string;
+    description: string;
+    html_url: string;
 
-    const handleSearchInput = (e) => {
+}
+
+export default function Search() {
+    const [searchInput, setSearchInput] = useState<string>("");
+    const [packages, setPackages] = useState<NpmPackage[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [error, setError] = useState<boolean>(false);
+
+    const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchInput(e.target.value);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsLoading(true);
         fetchPackages(searchInput)
@@ -36,7 +43,7 @@ export default function Search() {
     const renderPackages = () => {
         return (
             <ul>
-                {packages.map((packageInfo, index) => (
+                {packages.map((packageInfo: NpmPackage, index) => (
                     <li key={index}>
                         <a href={packageInfo.html_url}>
                             <h2>{packageInfo.name}</h2>

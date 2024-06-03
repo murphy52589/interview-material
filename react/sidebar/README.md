@@ -1,5 +1,12 @@
-# Sidebar
+## Sidebar
+### This hasn't come up in a live coding exercise yet, but I think it's something good to build
+### Requirements
+1. Icons can be passed as props to the component
+2. The sidebar should be able to be placed on the left or right side of the screen
+3. The sidebar should be able to be expanded or compacted. Icons show when compacted and text + icon shows when expanded
+4. The sidebar should be able to have multiple nested menus
+    1. Nested menus cannot have more nested menus
 
-This project is a menu drawer (also known as a sidebar) with nested menus (subsections) that can be places in any position within the drawer. There can multiple nested menus, however nested menus cannot have more nested menus. It can be compacted to show only the icons and expanded to show the text.
-
-I used [Vite](https://vitejs.dev/) as the base for this project and [Typescript](https://www.typescriptlang.org/) instead of Javascript.
+### Bonus
+1. Unit tests
+2. Accessibility

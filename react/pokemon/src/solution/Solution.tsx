@@ -1,11 +1,24 @@
 import { useEffect, useState } from "react";
 
+interface IPokemon {
+    name: string;
+    sprites: {
+        front_default: string;
+    };
+    abilities: {
+        ability: {
+            name: string;
+        };
+    }[];
+
+}
+
 export default function Solution() {
-    const [pokemon, setPokemon] = useState("");
-    const [pokemonData, setPokemonData] = useState([]);
-    const [buttonDisabled, setButtonDisabled] = useState(false);
-    const [error, setError] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [pokemon, setPokemon] = useState<string>("");
+    const [pokemonData, setPokemonData] = useState<IPokemon[]>([]);
+    const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
+    const [error, setError] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
