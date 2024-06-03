@@ -91,9 +91,7 @@ const getUserData = (userName: string): Promise<User> => {
 
 const getBasePizza = (pizzaSelected: string): Promise<Pizza> => {
     return new Promise((resolve, reject) => {
-        const pizzaDetails = pizzaSelection.find(
-            (pizza) => pizza.name === pizzaSelected,
-        );
+        const pizzaDetails = pizzaSelection.find((pizza) => pizza.name === pizzaSelected);
         if (pizzaDetails) {
             resolve(pizzaDetails);
         } else {
