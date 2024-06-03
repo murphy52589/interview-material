@@ -2,17 +2,26 @@ import { useState } from "react";
 
 let nextId = 0;
 
-export default function MedicationSolution() {
-    const [medications, setMedications] = useState([]);
+interface Medication {
+    name: string;
+    dose: string;
+    frequency: string;
+    comment: string;
+}
 
-    function handleSubmit(e) {
+export default function MedicationSolution() {
+    const [medications, setMedications] = useState<Medication[]>([]);
+
+    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         // Prevent the browser from reloading the page
         e.preventDefault();
 
         // Read the form data
-        const formJson = Object.fromEntries(new FormData(e.target).entries());
+        const formJson = Object.fromEntries(new FormData(e.currentTarget).entries());
         //nextId adds 1 to the current value for iterating later on
-        setMedications([...medications, { id: nextId++, ...formJson }]);
+        nextId++;
+        //TODO fix this logic
+        setMedications([...medications, { ...formJson }]);
     }
 
     return (
@@ -42,7 +51,7 @@ export default function MedicationSolution() {
             <div className="Medication-List">
                 <ol>
                     {medications.map((medication) => (
-                        <li key={medication.id}>
+                        <li key={medication.name}>
                             <div className="medication-list-item">
                                 {`${medication.name} ${medication.dose} ${medication.frequency} - ${medication.comment}`}
                             </div>

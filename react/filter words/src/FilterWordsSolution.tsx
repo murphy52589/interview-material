@@ -1,7 +1,7 @@
 import {words} from "./words.js";
 import { FormEvent, useState } from "react";
 
-export default function  FilterWords() {
+export default function  FilterWordsSolution() {
     const [query, setQuery] = useState<string>("");
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {

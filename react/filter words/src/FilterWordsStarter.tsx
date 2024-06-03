@@ -1,8 +1,6 @@
 import { words } from "./words.js";
 
-export default function FilterWords() {
-    function filterWords() {
-    }
+export default function FilterWordsStarter() {
 
     return (
         <form>
