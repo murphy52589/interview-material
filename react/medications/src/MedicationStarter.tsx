@@ -1,4 +1,4 @@
-export default function MedicationSolution() {
+export default function MedicationStarter() {
 
     return (
         <div className="App">

@@ -1,8 +1,9 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 let nextId = 0;
 
 interface Medication {
+    id: number;
     name: string;
     dose: string;
     frequency: string;
@@ -20,8 +21,20 @@ export default function MedicationSolution() {
         const formJson = Object.fromEntries(new FormData(e.currentTarget).entries());
         //nextId adds 1 to the current value for iterating later on
         nextId++;
-        //TODO fix this logic
-        setMedications([...medications, { ...formJson }]);
+
+        const formMedication: Medication = {
+            id: nextId,
+            name: formJson.name.toString(),
+            dose: formJson.dose.toString(),
+            frequency: formJson.frequency.toString(),
+            comment: formJson.comment.toString(),
+        };
+
+        setMedications([...medications, formMedication]);
+    }
+
+    const handleReset = () => {
+        setMedications([]);
     }
 
     return (
@@ -45,13 +58,13 @@ export default function MedicationSolution() {
                     </label>
                     <br />
                 </p>
-                <button type="reset">Reset form</button>
+                <button type="reset" onClick={handleReset}>Reset form</button>
                 <button type="submit">Submit</button>
             </form>
             <div className="Medication-List">
                 <ol>
                     {medications.map((medication) => (
-                        <li key={medication.name}>
+                        <li key={medication.id}>
                             <div className="medication-list-item">
                                 {`${medication.name} ${medication.dose} ${medication.frequency} - ${medication.comment}`}
                             </div>

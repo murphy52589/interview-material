@@ -23,8 +23,6 @@ export default function  FilterWordsSolution() {
         else if (query.includes("*")) {
             return words.filter((word) => {
                 if (query.startsWith("*")) return word.endsWith(query.substring(1));
-                else if (query.endsWith("*"))
-                    return word.startsWith(query.substring(0, query.length - 1));
                 else if (query.startsWith("*") && query.endsWith("*"))
                     return word.includes(query.substring(1, query.length - 1));
                 // case where asterisk is in the middle of the word - TODO
@@ -32,6 +30,8 @@ export default function  FilterWordsSolution() {
                     console.log("you got here");
                     return word.includes(query.substring(1, query.length - 1));
                 }
+                else if (query.endsWith("*"))
+                    return word.startsWith(query.substring(0, query.length - 1));
             });
         }
     }

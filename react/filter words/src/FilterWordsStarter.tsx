@@ -1,3 +1,4 @@
+// @ts-ignore
 import { words } from "./words.js";
 
 export default function FilterWordsStarter() {
