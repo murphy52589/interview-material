@@ -1,12 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
-import Starter from "./starter/Starter.tsx";
-import Solution from './solution/Solution.tsx';
+import DogBreedsSolution from './Solution/DogBreedsSolution'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    {/* <Starter /> */}
-    <Solution />
+    <DogBreedsSolution />
   </React.StrictMode>,
 )
