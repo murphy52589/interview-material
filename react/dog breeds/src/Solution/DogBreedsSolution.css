@@ -1,0 +1,14 @@
+body {
+  display: flex;
+  justify-content: center;
+}
+
+h1 {
+  font-family: helvetica;
+}
+
+.js_img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}

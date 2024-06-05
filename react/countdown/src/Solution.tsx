@@ -15,24 +15,27 @@ function Solution() {
     // this is a boolean that toggles when the reset button is clicked
     const [reset, setReset] = useState<boolean>(false);
 
-    // useRef is used to hold a mutable value that persists for the lifetime of the component.
-    // useRef doesn't cause re-renders when the value changes, unlike state.
-    // In this case, it is used to hold the interval ID of the countdown timer.
+    // useRef is used to hold a mutable value that persists for the lifetime of the component
+    // useRef doesn't cause re-renders when the value changes, unlike state
+    // In this case, it is used to hold the interval ID of the countdown timer
     const intervalRef = useRef<number | undefined>(undefined);
 
     // this function is called every second when the countdown is running.
-    // it decrements the seconds, and if the seconds reach 0, it decrements the minutes
     const updateTimer = () => {
+        // The previous state is passed to the updater function to ensure that the state is updated correctly
         setSeconds(previousSeconds => {
             if (previousSeconds === 0) {
                 if (minutes === 0) {
+                    // if minutes and seconds are both 0, the countdown is stopped
                     clearInterval(intervalRef.current);
                     return 0;
                 } else {
+                    // if seconds are 0 but minutes are not, the minutes are decremented by 1 and seconds are set to 59
                     setMinutes(previousMinutes => previousMinutes - 1);
                     return 59;
                 }
             } else {
+                // if seconds are not 0, seconds are decremented by 1
                 return previousSeconds - 1;
             }
         });
@@ -40,13 +43,13 @@ function Solution() {
 
     // This hook is used to start the countdown when the running state is true.
     // It sets an interval that calls updateTimer every second.
-    // The interval is cleared when the component unmounts or when the running, minutes, or reset state changes
     useEffect(() => {
-        if (running) {
-            intervalRef.current = setInterval(updateTimer, 1000);
-        }
-
+        if (running) intervalRef.current = setInterval(updateTimer, 1000);
+        // The interval is cleared when the component unmounts or when the running, minutes, or reset state changes
         return () => clearInterval(intervalRef.current);
+        // hook runs when running, minutes, or reset state changes
+        // Minutes example - if the timer is started and the minutes state decreases, 
+        // the old interval needs to be cleared and start a new one to reflect the updated minutes state
     }, [running, minutes, reset]);
 
     // This function is called when the start button is clicked.
