@@ -20,6 +20,8 @@ function Solution() {
     // In this case, it is used to hold the interval ID of the countdown timer
     const intervalRef = useRef<number | undefined>(undefined);
 
+    // TODO handle decimals, negative numbers and E
+
     // this function is called every second when the countdown is running.
     const updateTimer = () => {
         // The previous state is passed to the updater function to ensure that the state is updated correctly
@@ -45,10 +47,10 @@ function Solution() {
     // It sets an interval that calls updateTimer every second.
     useEffect(() => {
         if (running) intervalRef.current = setInterval(updateTimer, 1000);
-        // The interval is cleared when the component unmounts or when the running, minutes, or reset state changes
+        // The interval is cleared when the running, minutes, or reset state changes
         return () => clearInterval(intervalRef.current);
         // hook runs when running, minutes, or reset state changes
-        // Minutes example - if the timer is started and the minutes state decreases, 
+        // Minutes example - if the timer is started and the minutes state decreases,
         // the old interval needs to be cleared and start a new one to reflect the updated minutes state
     }, [running, minutes, reset]);
 

@@ -1,0 +1,32 @@
+table {
+  border-collapse: collapse;
+}
+
+.table-cell {
+  border: 1px solid gray;
+  margin: 0;
+  padding: 5px 10px;
+  width: max-content;
+  min-width: 150px;
+}
+
+.form-container {
+  padding: 20px;
+  border: 1px solid #F0F8FF;
+  border-radius: 15px;
+  width: max-content;
+  margin-bottom: 40px;
+}
+
+.form-inputs {
+  margin-bottom: 5px;
+}
+
+.submit-button {
+  margin-top: 10px;
+  padding: 10px 15px;
+  border: none;
+  background-color: lightseagreen;
+  font-size: 14px;
+  border-radius: 5px;
+}

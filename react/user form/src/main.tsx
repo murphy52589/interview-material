@@ -1,9 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Solution from './Solution'
+import './index.css'
+import UserFormSolution from './UserFormSolution'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <Solution />
+    <UserFormSolution />
   </React.StrictMode>,
 )
