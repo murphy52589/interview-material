@@ -11,3 +11,5 @@
 1. Add a search bar to filter the list of dog breeds
 2. Add a button to refresh the list of dog breeds
 3. Consider the performance when using the API to load images
+4. No name should be repeated
+5. A shuffle button to shuffle the names and images

@@ -1,4 +1,4 @@
-export default function CounterSolution() {
+export default function CounterStarter() {
 
     return (
         <div>

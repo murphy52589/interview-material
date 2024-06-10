@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import FilterWordsSolution from './FilterWordsSolution'
+import FilterWordsStarter from "./FilterWordsStarter.tsx";
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <FilterWordsSolution />
+    <FilterWordsStarter />
   </React.StrictMode>,
 )

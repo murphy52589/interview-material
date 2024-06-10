@@ -9,7 +9,7 @@ export interface NpmPackage {
 
 }
 
-export default function Search() {
+export default function NpmSearchSolution() {
     const [searchInput, setSearchInput] = useState<string>("");
     const [packages, setPackages] = useState<NpmPackage[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);

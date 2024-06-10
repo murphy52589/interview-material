@@ -51,3 +51,9 @@ In order to satisfy the task's requirements, you need to implement the following
 - Do not clear the inputs on a `start` button click
 - Use the same button element for both pause and resume actions
 
+### Note / Bonus
+I was asked about this stuff during the follow up interview:
+- How would you test this component?
+- Validation (negative values, `E` (exponents), decimals)
+- How could I extract the logic? (hint - custom hook)
+

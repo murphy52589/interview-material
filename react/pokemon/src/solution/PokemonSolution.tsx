@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 
 interface IPokemon {
     name: string;
@@ -13,7 +13,7 @@ interface IPokemon {
 
 }
 
-export default function Solution() {
+export default function PokemonSolution() {
     const [pokemon, setPokemon] = useState<string>("");
     const [pokemonData, setPokemonData] = useState<IPokemon[]>([]);
     const [buttonDisabled, setButtonDisabled] = useState<boolean>(false);
@@ -48,6 +48,10 @@ export default function Solution() {
         if (pokemonData) console.log(pokemonData);
     }, [pokemonData]);
 
+    if (isLoading) return 'Loading...';
+
+    if (error) return 'An error has occurred: ' + error;
+
     return (
         <>
             <div className="form">
@@ -63,28 +67,25 @@ export default function Solution() {
                     </form>
                 )}
             </div>
-            <div className="pokemonResults">
-                <div className="pokemonName">{`pokemon name: ${pokemonData.name}`}</div>
-                <img
-                    src={pokemonData.sprites && pokemonData.sprites.front_default}
-                    alt="pokemon"
-                />
-                <div>
-                    List of abilities below:
-                    <ul>
-                        {pokemonData.abilities &&
-                            pokemonData.abilities.map((ability, index) => {
-                                return <li key={index}>{ability.ability.name}</li>;
-                            })}
-                    </ul>
+
+            {pokemonData && pokemonData.name && pokemonData.sprites (
+                <div className="pokemonResults">
+                    <div className="pokemonName">{`pokemon name: ${pokemonData.name}`}</div>
+                    <img
+                        src={pokemonData.sprites && pokemonData.sprites.front_default}
+                        alt="pokemon"
+                    />
+                    <div>
+                        List of abilities below:
+                        <ul>
+                            {pokemonData.abilities &&
+                                pokemonData.abilities.map((ability, index) => {
+                                    return <li key={index}>{ability.ability.name}</li>;
+                                })}
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div className="loading">
-                {isLoading ? <p>Results loading, please wait</p> : null}
-            </div>
-            <div className="message">
-                {error ? <p>An Error Occurred, try again</p> : null}
-            </div>
+            )}
         </>
     );
 }

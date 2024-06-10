@@ -66,6 +66,7 @@ const items: Item[] = sizes.reduce<Item[]>(
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
+
     <ListSolution items={items} />
   </React.StrictMode>,
 )

@@ -1,6 +1,4 @@
-// @ts-ignore
-import { words } from "./words.js";
-
+// TODO make sure to import the words from the words.js file
 export default function FilterWordsStarter() {
 
     return (

@@ -1,4 +1,4 @@
-export default function Starter()  {
+export default function PokemonStarter()  {
         return (
             <form>
                 <label>Enter a pokemon name</label>
