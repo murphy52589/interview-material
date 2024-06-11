@@ -1,8 +1,5 @@
 import './UserForm.css';
 
-import React, { useState } from 'react';
-import { createRoot } from 'react-dom/client';
-
 const style = {
   table: {
     borderCollapse: 'collapse'
@@ -41,36 +38,36 @@ function PhoneBookForm({ addEntryToPhoneBook }) {
     <form style={style.form.container}>
       <label>First name:</label>
       <br />
-      <input 
+      <input
         style={style.form.inputs}
         className='userFirstname'
-        name='userFirstname' 
+        name='userFirstname'
         type='text'
       />
       <br/>
       <label>Last name:</label>
       <br />
-      <input 
+      <input
         style={style.form.inputs}
         className='userLastname'
-        name='userLastname' 
-        type='text' 
+        name='userLastname'
+        type='text'
       />
       <br />
       <label>Phone:</label>
       <br />
       <input
         style={style.form.inputs}
-        className='userPhone' 
-        name='userPhone' 
+        className='userPhone'
+        name='userPhone'
         type='text'
       />
       <br/>
-      <input 
-        style={style.form.submitBtn} 
+      <input
+        style={style.form.submitBtn}
         className='submitButton'
-        type='submit' 
-        value='Add User' 
+        type='submit'
+        value='Add User'
       />
     </form>
   )
@@ -79,7 +76,7 @@ function PhoneBookForm({ addEntryToPhoneBook }) {
 function InformationTable({ entries }) {
   return (
     <table style={style.table} className='informationTable'>
-      <thead> 
+      <thead>
         <tr>
           <th style={style.tableCell}>First name</th>
           <th style={style.tableCell}>Last name</th>

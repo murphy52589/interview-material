@@ -2,7 +2,7 @@ table {
   border-collapse: collapse;
 }
 
-.table-cell {
+th, td {
   border: 1px solid gray;
   margin: 0;
   padding: 5px 10px;
@@ -10,7 +10,7 @@ table {
   min-width: 150px;
 }
 
-.form-container {
+form {
   padding: 20px;
   border: 1px solid #F0F8FF;
   border-radius: 15px;
@@ -18,7 +18,7 @@ table {
   margin-bottom: 40px;
 }
 
-.form-inputs {
+input {
   margin-bottom: 5px;
 }
 

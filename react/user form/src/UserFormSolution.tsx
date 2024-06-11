@@ -1,39 +1,5 @@
-import React, { FormEvent, useState } from 'react';
-import { createRoot } from 'react-dom/client';
-
-
-const style = {
-  table: {
-    borderCollapse: 'collapse'
-  },
-  tableCell: {
-    border: '1px solid gray',
-    margin: 0,
-    padding: '5px 10px',
-    width: 'max-content',
-    minWidth: '150px'
-  },
-  form: {
-    container: {
-      padding: '20px',
-      border: '1px solid #F0F8FF',
-      borderRadius: '15px',
-      width: 'max-content',
-      marginBottom: '40px'
-    },
-    inputs: {
-      marginBottom: '5px'
-    },
-    submitBtn: {
-      marginTop: '10px',
-      padding: '10px 15px',
-      border:'none',
-      backgroundColor: 'lightseagreen',
-      fontSize: '14px',
-      borderRadius: '5px'
-    }
-  }
-}
+import { FormEvent, useState } from 'react';
+import './UserForm.css';
 
 interface Entry {
   firstName: string;
@@ -41,8 +7,15 @@ interface Entry {
   phoneNumber: string;
 }
 
+interface PhoneBookFormProps {
+  addEntryToPhoneBook: (entry: Entry) => void;
+}
 
-function PhoneBookForm({ addEntryToPhoneBook }) {
+interface InformationTableProps {
+  entries: Entry[];
+}
+
+function PhoneBookForm({ addEntryToPhoneBook }: PhoneBookFormProps) {
   const [firstName, setFirstName] = useState<string>('Coder');
   const [lastName, setLastName] = useState<string>('Byte');
   const [phoneNumber, setPhoneNumber] = useState<string>('8885559999');
@@ -52,25 +25,23 @@ function PhoneBookForm({ addEntryToPhoneBook }) {
     addEntryToPhoneBook({ firstName, lastName, phoneNumber });
   }
   return (
-    <form onSubmit={handleSubmit} style={style.form.container}>
+    <form onSubmit={handleSubmit}>
       <label>First name:</label>
       <br />
-      <input 
-        style={style.form.inputs}
+      <input
         className='userFirstname'
-        name='userFirstname' 
+        name='userFirstname'
         type='text'
         value={firstName}
         onChange={e => setFirstName(e.target.value)}
       />
-      <br/>
+      <br />
       <label>Last name:</label>
       <br />
-      <input 
-        style={style.form.inputs}
+      <input
         className='userLastname'
-        name='userLastname' 
-        type='text' 
+        name='userLastname'
+        type='text'
         value={lastName}
         onChange={e => setLastName(e.target.value)}
       />
@@ -78,40 +49,38 @@ function PhoneBookForm({ addEntryToPhoneBook }) {
       <label>Phone:</label>
       <br />
       <input
-        style={style.form.inputs}
-        className='userPhone' 
-        name='userPhone' 
+        className='userPhone'
+        name='userPhone'
         type='text'
         value={phoneNumber}
         onChange={e => setPhoneNumber(e.target.value)}
       />
-      <br/>
-      <input 
-        style={style.form.submitBtn} 
-        className='submitButton'
-        type='submit' 
-        value='Add User' 
+      <br />
+      <input
+        className='submit-button'
+        type='submit'
+        value='Add User'
       />
     </form>
   )
 }
 
-function InformationTable({ entries }) {
+function InformationTable({ entries }: InformationTableProps) {
   return (
-    <table style={style.table} className='informationTable'>
-      <thead> 
+    <table>
+      <thead>
         <tr>
-          <th style={style.tableCell}>First name</th>
-          <th style={style.tableCell}>Last name</th>
-          <th style={style.tableCell}>Phone</th>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Phone</th>
         </tr>
       </thead>
       <tbody>
-        {entries.map((entry, index) => (
+        {entries.map((entry: Entry, index: number) => (
           <tr key={index}>
-            <td style={style.tableCell}>{entry.firstName}</td>
-            <td style={style.tableCell}>{entry.lastName}</td>
-            <td style={style.tableCell}>{entry.phoneNumber}</td>
+            <td>{entry.firstName}</td>
+            <td>{entry.lastName}</td>
+            <td>{entry.phoneNumber}</td>
           </tr>
         ))}
       </tbody>
@@ -119,10 +88,10 @@ function InformationTable({ entries }) {
   );
 }
 
-export default function UserFormSolution(props) {
-  const [entries, setEntries] = useState([]);
+export default function UserFormSolution() {
+  const [entries, setEntries] = useState<Entry[]>([]);
 
-  const addEntryToPhoneBook = (entry) => {
+  const addEntryToPhoneBook = (entry: Entry) => {
     setEntries([...entries, entry]);
   }
 
@@ -130,8 +99,8 @@ export default function UserFormSolution(props) {
 
   return (
     <section>
-      <PhoneBookForm addEntryToPhoneBook={addEntryToPhoneBook}/>
-      <InformationTable entries={sortedEntries}/>
+      <PhoneBookForm addEntryToPhoneBook={addEntryToPhoneBook} />
+      <InformationTable entries={sortedEntries} />
     </section>
   );
 }
