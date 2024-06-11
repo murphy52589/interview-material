@@ -29,7 +29,6 @@ function PhoneBookForm({ addEntryToPhoneBook }: PhoneBookFormProps) {
       <label>First name:</label>
       <br />
       <input
-        className='userFirstname'
         name='userFirstname'
         type='text'
         value={firstName}
@@ -39,7 +38,6 @@ function PhoneBookForm({ addEntryToPhoneBook }: PhoneBookFormProps) {
       <label>Last name:</label>
       <br />
       <input
-        className='userLastname'
         name='userLastname'
         type='text'
         value={lastName}
@@ -49,7 +47,6 @@ function PhoneBookForm({ addEntryToPhoneBook }: PhoneBookFormProps) {
       <label>Phone:</label>
       <br />
       <input
-        className='userPhone'
         name='userPhone'
         type='text'
         value={phoneNumber}
