@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { HeaderSolution } from "./HeaderSolution.tsx";
 import { AddInputSolution } from "./AddInputSolution.tsx";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
 import { v4 as uuid } from "uuid";
@@ -79,7 +79,7 @@ export const TodoList = () => {
         }
     }, [todos, isInitialized]);
 
-    const addTodo = (label: string) => {
+    const addTodo = useCallback((label: string) => {
         const newTodo = {
             id: uuid(),
             label,
@@ -89,10 +89,10 @@ export const TodoList = () => {
         const newTodos = [...todos, newTodo];
     
         setTodos(sortTodos(newTodos));
-    };
+    }, []);
 
     // It maps through the previous todos array and if the todo id matches the id passed in, it updates the checked property, otherwise it returns the todo as is
-    const handleChange = (id: string, checked: boolean) => {
+    const handleChange = useCallback((id: string, checked: boolean) => {
         const newTodos = todos.map((todo) => {
             if (todo.id === id) {
                 return { ...todo, checked };
@@ -102,7 +102,7 @@ export const TodoList = () => {
         });
     
         setTodos(sortTodos(newTodos));
-    };
+    }, [todos]);
 
     // maps through the todos array and returns a TodoItemSolution component for each todo
     // note that if the props are the same as the object key, you can use the spread operator to pass the object as props

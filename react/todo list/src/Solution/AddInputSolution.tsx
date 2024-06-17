@@ -22,6 +22,8 @@ export const AddInputSolution: FC<AddInputProps> = ({ onAdd }) => {
     const [input, setInput] = useState("");
 
     const onSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+        // used to prevent the default action of an event from happening
+        // in this case, it prevents the form from submitting and refreshing the page
         e.preventDefault();
         onAdd(input);
         setInput("");
