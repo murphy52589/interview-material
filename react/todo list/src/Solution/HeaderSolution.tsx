@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HeaderStarter = styled.div({
+export const HeaderSolution = styled.div({
     width: "100%",
     height: 150,
     fontSize: 60,

@@ -6,4 +6,5 @@
 4. Currently selected items should be visually highlighted.
 5. Currently selected items' names should be shown at the top of the page.
 
-- Note - in the original task, `items` is intentionally a pain in the ass to read. Feel free to refactor it
+- Note - in the original task, `items` is intentionally difficult to read. I've refactored it to be more readable. I 
+  have left the original code commented out in the `Main.tsx` file.

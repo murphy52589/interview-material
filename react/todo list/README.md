@@ -1,18 +1,18 @@
 ## Todo List
-### Requirements
-1. The user should be able to add a new task using an input field.
-2. The app should display a list of tasks. 
-3. Each task should have a checkbox to mark it as completed and a button to 
-   delete it.
-4. When a task is marked as completed, it should be visually distinct from the other tasks (e.g., crossed out or 
-   grayed out).
-5. The app should handle potential errors gracefully. For example, it should prevent the user from adding an empty task.
-6. Consider the user experience and accessibility when building your solution. The design is up to you, but it should 
-   be user-friendly and accessible.
-7. Write clean, readable code. Structure your code in a way that is easy to understand and maintain.
-8. Think about how you would test your application. You don't need to write actual tests, but be prepared to discuss 
-   your testing strategy.
+The goal of this exercise is to create a working todo list with persistent data storage.
 
-### Additional Considerations
-- Think about the structure of your application as if it were to grow over time.
-- Comment your code where necessary to explain your thought process
+To start with, we have a styled todo list that supports adding todos. We also have pre-made styles for completed todo items. Although there’s no working mechanism for “completing” a todo.
+
+### Requirements
+- Clicking on a todo item should toggle the “checked” state.
+- The todo list state should be saved and loaded from local storage.
+- Checked items should sink to the bottom of the list automatically
+
+### Stretch Goals
+- Allow todos to be deleted. When you hover your mouse over a todo, an X should appear on the far right side, clicking the X should remove it from the list.
+- Add hidden timestamps to todos (created_at, completed_at), these will be used for sorting
+- The active todos should be sorted by created_at descending
+- The completed todos should be sorted by completed_at ascending
+
+### Note
+This exercise came from a Coderpad live coding interview

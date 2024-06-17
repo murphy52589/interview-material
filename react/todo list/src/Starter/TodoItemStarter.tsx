@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {FC, useState} from "react";
+import {FC} from "react";
 
 export const Wrapper = styled.label({
     display: "flex",
@@ -14,7 +14,7 @@ export const Wrapper = styled.label({
     cursor: "pointer",
 });
 
-const Label = styled.span<{ checked: boolean }>(({ checked }) => ({
+const Label = styled.span<{ checked: boolean }>(({checked}) => ({
     textDecoration: checked ? "line-through" : "none",
     fontSize: 20,
     margin: 0,
@@ -35,15 +35,14 @@ export interface TodoItemProps {
 
 }
 
-export const TodoItem: FC<TodoItemProps> = ({  }) => {
+export const TodoItemStarter: FC<TodoItemProps> = () => {
 
     return (
         <Wrapper>
             <Checkbox
                 type="checkbox"
-                checked={checked}
             />
-            <Label checked={checked}>{ label }</Label>
+            <Label checked/>
         </Wrapper>
     );
 }

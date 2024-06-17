@@ -18,7 +18,7 @@ interface AddInputProps {
 
 }
 
-export const AddInput: FC<AddInputProps> = () => {
+export const AddInputStarter: FC<AddInputProps> = () => {
     return (
         <Form>
             <Input placeholder="Add a task" />

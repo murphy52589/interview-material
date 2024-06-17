@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {FC} from "react";
+import { FC, useState } from "react";
 
 const Form = styled.form({
     width: "100%",
@@ -15,13 +15,25 @@ const Input = styled.input({
 });
 
 interface AddInputProps {
-
+    onAdd: (label: string) => void;
 }
 
-export const AddInputStarter: FC<AddInputProps> = () => {
+export const AddInputSolution: FC<AddInputProps> = ({ onAdd }) => {
+    const [input, setInput] = useState("");
+
+    const onSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+        e.preventDefault();
+        onAdd(input);
+        setInput("");
+    }
+
     return (
-        <Form>
-            <Input placeholder="Add a task" />
+        <Form onSubmit={onSubmit}>
+            <Input
+                onChange={(e) => setInput(e.target.value)}
+                value={input}
+                placeholder="Add a new todo item here"
+            />
         </Form>
     );
 }

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {FC} from "react";
+import { FC } from "react";
 
 export const Wrapper = styled.label({
     display: "flex",
@@ -14,7 +14,8 @@ export const Wrapper = styled.label({
     cursor: "pointer",
 });
 
-const Label = styled.span<{ checked: boolean }>(({checked}) => ({
+// based on if the todo item is checked, the label will have a line-through style
+const Label = styled.span<{ checked: boolean }>(({ checked }) => ({
     textDecoration: checked ? "line-through" : "none",
     fontSize: 20,
     margin: 0,
@@ -32,17 +33,28 @@ const Checkbox = styled.input({
 });
 
 export interface TodoItemProps {
-
+    id: string;
+    label: string;
+    checked: boolean;
+    onChange: (checked: boolean) => void;
 }
 
-export const TodoItemStarter: FC<TodoItemProps> = () => {
+export const TodoItemSolution: FC<TodoItemProps> = ({
+    id,
+    label,
+    checked = false,
+    onChange,
+}) => {
 
     return (
         <Wrapper>
             <Checkbox
                 type="checkbox"
+                id={id}
+                checked={checked}
+                onChange={(e) => onChange(e.target.checked)}
             />
-            <Label checked/>
+            <Label checked={checked}>{label}</Label>
         </Wrapper>
     );
-}
+};
