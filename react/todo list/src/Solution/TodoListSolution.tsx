@@ -48,9 +48,19 @@ export const TodoList = () => {
     //this exists because otherwise, the first use effect will trigger the second, overwriting any data from the local storage with initial data
     const [isInitialized, setIsInitialized] = useState(false);
 
-    // sorts the todos array by checked property. 1 represents checked, -1 represents unchecked
     const sortTodos = (todos: Todo[]) => {
-        return todos.sort((a: Todo, b: Todo) => (a.checked === b.checked ? 0 : a.checked ? 1 : -1));
+        return todos.sort((a: Todo, b: Todo) => {
+            if (a.checked === b.checked) {
+                //elements are equal, so no change in order
+                return 0;
+            } else if (a.checked) {
+                //a is checked, so it should be after b
+                return 1;
+            } else {
+                //a is unchecked, so it should be before b
+                return -1;
+            }
+        });
     };
 
     useEffect(() => {
@@ -62,32 +72,36 @@ export const TodoList = () => {
     }, []);
 
     // when the todos change, update the local storage with the new todos array
+    // if isInitialized is false, do not update the local storage. Once isInitialized has changed (first use effect), the second use effect will trigger
     useEffect(() => {
         if (isInitialized) {
             localStorage.setItem('todos', JSON.stringify(sortTodos(todos)));
         }
     }, [todos, isInitialized]);
 
-
-    // setTodos is performing a functional update. It copies the previous todos array and appends a new todo to it
     const addTodo = (label: string) => {
-        setTodos(prevTodos => sortTodos([...prevTodos, {
+        const newTodo = {
             id: uuid(),
             label,
             checked: false
-        }]));
+        };
+    
+        const newTodos = [...todos, newTodo];
+    
+        setTodos(sortTodos(newTodos));
     };
 
-    // handleChange is performing a functional update. 
     // It maps through the previous todos array and if the todo id matches the id passed in, it updates the checked property, otherwise it returns the todo as is
     const handleChange = (id: string, checked: boolean) => {
-        setTodos(prev => sortTodos(prev.map((todo) => {
+        const newTodos = todos.map((todo) => {
             if (todo.id === id) {
                 return { ...todo, checked };
             } else {
                 return todo;
             }
-        })));
+        });
+    
+        setTodos(sortTodos(newTodos));
     };
 
     // maps through the todos array and returns a TodoItemSolution component for each todo
