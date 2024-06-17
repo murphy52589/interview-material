@@ -45,6 +45,9 @@ const initialData: Todo[] = [
 export const TodoList = () => {
     const [todos, setTodos] = useState<Todo[]>(initialData);
 
+    //this exists because otherwise, the first use effect will trigger the second, overwriting any data from the local storage with initial data
+    const [isInitialized, setIsInitialized] = useState(false);
+
     // sorts the todos array by checked property. 1 represents checked, -1 represents unchecked
     const sortTodos = (todos: Todo[]) => {
         return todos.sort((a: Todo, b: Todo) => (a.checked === b.checked ? 0 : a.checked ? 1 : -1));
@@ -55,12 +58,15 @@ export const TodoList = () => {
         if (storedTodos) {
             setTodos(JSON.parse(storedTodos));
         }
+        setIsInitialized(true);
     }, []);
 
     // when the todos change, update the local storage with the new todos array
     useEffect(() => {
-        localStorage.setItem('todos', JSON.stringify(sortTodos(todos)));
-    }, [todos]);
+        if (isInitialized) {
+            localStorage.setItem('todos', JSON.stringify(sortTodos(todos)));
+        }
+    }, [todos, isInitialized]);
 
 
     // setTodos is performing a functional update. It copies the previous todos array and appends a new todo to it
