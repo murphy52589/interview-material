@@ -91,6 +91,11 @@ export const TodoList = () => {
         setTodos(sortTodos(newTodos));
     }, []);
 
+    const deleteTodo = useCallback((id: string) => {
+        const newTodos = todos.filter((todo) => todo.id !== id);
+        setTodos(sortTodos(newTodos));
+    }, []);
+
     // It maps through the previous todos array and if the todo id matches the id passed in, it updates the checked property, otherwise it returns the todo as is
     const handleChange = useCallback((id: string, checked: boolean) => {
         const newTodos = todos.map((todo) => {
@@ -112,7 +117,12 @@ export const TodoList = () => {
             <AddInputSolution onAdd={addTodo} />
             <TodoListSolution>
                 {todos.map((todo) => (
-                    <TodoItemSolution key={todo.id} {...todo} onChange={(checked) => handleChange(todo.id, checked)} />
+                    <TodoItemSolution 
+                    key={todo.id} 
+                    onChange={(checked) => handleChange(todo.id, checked)} 
+                    onDelete={() => deleteTodo(todo.id)}
+                    {...todo} 
+                    />
                 ))}
             </TodoListSolution>
         </Wrapper>

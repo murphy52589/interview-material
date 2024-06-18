@@ -37,6 +37,7 @@ export interface TodoItemProps {
     label: string;
     checked: boolean;
     onChange: (checked: boolean) => void;
+    onDelete: () => void;
 }
 
 export const TodoItemSolution: FC<TodoItemProps> = ({
@@ -44,7 +45,17 @@ export const TodoItemSolution: FC<TodoItemProps> = ({
     label,
     checked = false,
     onChange,
+    onDelete,
 }) => {
+
+    const DeleteButton = styled.button({
+        marginLeft: "auto",
+        border: "none",
+        background: "none",
+        color: "red",
+        cursor: "pointer",
+        fontSize: 14,
+    });
 
     return (
         <Wrapper>
@@ -55,6 +66,7 @@ export const TodoItemSolution: FC<TodoItemProps> = ({
                 onChange={(e) => onChange(e.target.checked)}
             />
             <Label checked={checked}>{label}</Label>
+            <DeleteButton onClick={onDelete}>Delete</DeleteButton>
         </Wrapper>
     );
 };
