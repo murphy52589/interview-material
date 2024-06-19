@@ -22,6 +22,8 @@ export interface Todo {
     id: string;
     label: string;
     checked: boolean;
+    created_at: string;
+    completed_at?: string;
 }
 
 const initialData: Todo[] = [
@@ -29,88 +31,78 @@ const initialData: Todo[] = [
         id: uuid(),
         label: "Buy groceries",
         checked: false,
+        created_at: new Date().toISOString(),
     },
     {
         id: uuid(),
         label: "Reboot computer",
         checked: false,
+        created_at: new Date().toISOString(),
     },
     {
         id: uuid(),
         label: "Ace CoderPad interview",
         checked: true,
+        created_at: new Date().toISOString(),
+        completed_at: new Date().toISOString(),
     },
 ];
 
 export const TodoList = () => {
-    const [todos, setTodos] = useState<Todo[]>(initialData);
-
-    //this exists because otherwise, the first use effect will trigger the second, overwriting any data from the local storage with initial data
-    const [isInitialized, setIsInitialized] = useState(false);
+    const [todos, setTodos] = useState<Todo[]>(() => {
+        const storedTodos = localStorage.getItem('todos');
+        const parsedTodos = storedTodos ? JSON.parse(storedTodos) : [];
+        return parsedTodos.length > 0 ? parsedTodos : initialData;
+    });
 
     const sortTodos = (todos: Todo[]) => {
-        return todos.sort((a: Todo, b: Todo) => {
-            if (a.checked === b.checked) {
-                //elements are equal, so no change in order
-                return 0;
-            } else if (a.checked) {
-                //a is checked, so it should be after b
-                return 1;
-            } else {
-                //a is unchecked, so it should be before b
-                return -1;
-            }
-        });
+        const activeTodos = todos
+            .filter((todo) => !todo.checked)
+            .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+
+        const completedTodos = todos
+            .filter((todo) => todo.checked)
+            .sort((a, b) => new Date(a.completed_at!).getTime() - new Date(b.completed_at!).getTime());
+
+        return [...activeTodos, ...completedTodos];
     };
 
-    useEffect(() => {
-        const storedTodos = localStorage.getItem('todos');
-        if (storedTodos) {
-            setTodos(JSON.parse(storedTodos));
-        }
-        setIsInitialized(true);
-    }, []);
-
     // when the todos change, update the local storage with the new todos array
-    // if isInitialized is false, do not update the local storage. Once isInitialized has changed (first use effect), the second use effect will trigger
     useEffect(() => {
-        if (isInitialized) {
-            localStorage.setItem('todos', JSON.stringify(sortTodos(todos)));
-        }
-    }, [todos, isInitialized]);
+        localStorage.setItem('todos', JSON.stringify(todos));
+    }, [todos]);
 
     const addTodo = useCallback((label: string) => {
         const newTodo = {
             id: uuid(),
             label,
-            checked: false
+            checked: false,
+            created_at: new Date().toISOString(),
         };
-    
-        const newTodos = [...todos, newTodo];
-    
-        setTodos(sortTodos(newTodos));
-    }, []);
 
-    const deleteTodo = useCallback((id: string) => {
+        const newTodos = [...todos, newTodo];
+
+        setTodos(sortTodos(newTodos));
+    }, [todos]);
+
+    const deleteTodo = useCallback((event: React.MouseEvent, id: string) => {
+        event.stopPropagation();
         const newTodos = todos.filter((todo) => todo.id !== id);
         setTodos(sortTodos(newTodos));
-    }, []);
+    }, [todos]);
 
-    // It maps through the previous todos array and if the todo id matches the id passed in, it updates the checked property, otherwise it returns the todo as is
     const handleChange = useCallback((id: string, checked: boolean) => {
         const newTodos = todos.map((todo) => {
             if (todo.id === id) {
-                return { ...todo, checked };
+                return { ...todo, checked, completed_at: checked ? new Date().toISOString() : undefined };
             } else {
                 return todo;
             }
         });
-    
+
         setTodos(sortTodos(newTodos));
     }, [todos]);
 
-    // maps through the todos array and returns a TodoItemSolution component for each todo
-    // note that if the props are the same as the object key, you can use the spread operator to pass the object as props
     return (
         <Wrapper>
             <HeaderSolution>Todo List</HeaderSolution>
@@ -118,10 +110,10 @@ export const TodoList = () => {
             <TodoListSolution>
                 {todos.map((todo) => (
                     <TodoItemSolution 
-                    key={todo.id} 
-                    onChange={(checked) => handleChange(todo.id, checked)} 
-                    onDelete={() => deleteTodo(todo.id)}
-                    {...todo} 
+                        key={todo.id} 
+                        onChange={(checked) => handleChange(todo.id, checked)} 
+                        onDelete={(event) => deleteTodo(event, todo.id)}
+                        {...todo} 
                     />
                 ))}
             </TodoListSolution>

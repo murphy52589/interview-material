@@ -10,7 +10,6 @@ To start with, we have a styled todo list that supports adding todos. We also ha
 
 ### Stretch Goals
 - Allow todos to be deleted. When you hover your mouse over a todo, an X should appear on the far right side, clicking the X should remove it from the list.
-- Add hidden timestamps to todos (created_at, completed_at), these will be used for sorting
 - The active todos should be sorted by created_at descending
 - The completed todos should be sorted by completed_at ascending
 
