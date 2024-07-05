@@ -27,17 +27,18 @@ export default function CardSolution() {
     }, []);
 
     const shuffle = () => {
-        const tempDeck = [...deck].sort(() => 0.5 - Math.random());
-        setShuffledDeck(tempDeck);
-        return shuffledDeck;
-    };
+        setShuffledDeck(prevDeck => prevDeck.slice().sort(() => 0.5 - Math.random()));
+      };
 
     //draw card at random and update deck to have that card removed
     const drawCard = () => {
+        // floor to get integer, random to get random index
         const cardIndex = Math.floor(Math.random() * shuffledDeck.length);
-        const newDeck = [...shuffledDeck]; // Create a copy of the deck
-        newDeck.splice(cardIndex, 1); // Remove the card from the deck
-        setShuffledDeck(newDeck); // Update the deck
+        setShuffledDeck((prevDeck) => {
+            const newDeck = [...prevDeck];
+            newDeck.splice(cardIndex, 1);
+            return newDeck;
+        });
     };
 
     return (

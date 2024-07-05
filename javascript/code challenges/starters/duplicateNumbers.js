@@ -9,4 +9,4 @@ array.push(1, 2, 3, 50, 75);
 
 console.log(array);
 
-console.log(DuplicateNumbers(array));
+console.log(duplicateNumbers(array));
