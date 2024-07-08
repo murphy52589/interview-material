@@ -8,4 +8,8 @@ Build a brewery app using the Open Brewery API - https://www.openbrewerydb.org/d
 - Allow users to filter breweries by city, state and name
 
 ### Bonus
+- Loading state
+- Error handling
+- Responsive design
+- Unit tests
 - Paginate the results

@@ -1,0 +1,42 @@
+.App {
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin: 10px 0;
+}
+
+.category {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category.enabled {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.category.disabled {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.subcategories {
+  margin-left: 20px;
+  border-left: 2px solid #ccc;
+  padding-left: 10px;
+}
+
+.status {
+  margin-left: 10px;
+}
