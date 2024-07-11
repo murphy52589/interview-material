@@ -14,6 +14,7 @@ const FormValidationExample: React.FC = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    // using [name] to dynamically set the key in the object
     setValues(prevValues => ({
       ...prevValues,
       [name]: value,

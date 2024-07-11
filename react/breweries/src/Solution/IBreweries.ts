@@ -10,7 +10,7 @@ export interface IBreweries {
   postal_code: string;
   country: string;
   longitude: string;
-  latitutde: string;
+  latitude: string;
   phone?: string;
   website_url?: string;
   state: string;
