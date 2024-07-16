@@ -1,12 +1,5 @@
-// Part 1
-
-
 // In an HTTP request, the Accept-Language header describes the list of languages that the requester would like content to be returned in. The header takes the form of a comma-separated list of language tags. For example:
-
 //   Accept-Language: en-US, fr-CA, fr-FR
-
-
-
 // means that the reader would accept:
 
 // English as spoken in the United States (most preferred)
@@ -22,9 +15,6 @@
 
 
 // Examples:
-
-
-
 // parse_accept_language(
 //   "en-US, fr-CA, fr-FR",  # the client's Accept-Language header, a string
 //   ["fr-FR", "en-US"]      # the server's supported languages, a set of strings
@@ -41,7 +31,7 @@
 
 // need to be returned in the same order as they appeared in the header (acceptLanguage in this case)
 
-//correcteness -> readability -> performance
+//correctness -> readability -> performance
 const languages = (acceptLanguage, possibleLanguages) => {
     // splitting by comma into array
     const splitLanguages = acceptLanguage.split(", ");
