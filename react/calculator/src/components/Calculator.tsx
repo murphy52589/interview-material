@@ -1,93 +1,97 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import './Calculator.css';
 
+type ButtonProps = {
+  value: string;
+  onClick: (value: string) => void;
+  className?: string;
+};
+
+const Button = ({ value, onClick, className = '' }: ButtonProps) => (
+  <button className={className} onClick={() => onClick(value)}>
+    {value}
+  </button>
+);
+
 export default function Calculator() {
-    const [input, setInput] = useState('0');
+  const [input, setInput] = useState<string>('0');
 
-    const handleClick = (value: string) => {
-        // checks if input is the +/- toggle
-        if (value === '+/-') {
-            // if input is negative, do something
-            if (input.startsWith('-')) {
-                // remove negative signage to make the number positive
-                setInput(input.slice(1));
-            } else {
-                // otherwise, prepend negative sign
-                setInput('-' + input);
-            }
-        } else if (value === '%') {
-            // if the % button is clicked, convert the current input to a percentage
-            setInput(String(Number(input) / 100));
-        } else if (['+', '-', '*', '/'].includes(value)) {
-            // if an operator (+, -, *, /) is clicked, append it to the current input with spaces for readability
-            setInput(`${input} ${value} `);
-        } else {
-            // for any other button (numbers, decimal), append its value to the current input
-            setInput(input + value);
-        }
-    };
+  const handleClick = (value: string): void => {
+    switch (value) {
+      case '+/-':
+        setInput(input.startsWith('-') ? input.slice(1) : '-' + input);
+        break;
+      case '%':
+        setInput(String(Number(input) / 100));
+        break;
+      case '+':
+      case '-':
+      case '*':
+      case '/':
+        setInput(`${input} ${value} `);
+        break;
+      default:
+        setInput(input === '0' ? value : input + value);
+        break;
+    }
+  };
 
-    const performOperation = (operation: string, num1: number, num2: number) => {
-        switch (operation) {
-            case '+':
-                return num1 + num2;
-            case '-':
-                return num1 - num2;
-            case '*':
-                return num1 * num2;
-            case '/':
-                return num1 / num2;
-            default:
-                // if the operation is not recognized, return 0
-                return 0;
-        }
-    };
+  const performOperation = (operation: string, num1: number, num2: number): number => {
+    switch (operation) {
+      case '+':
+        return num1 + num2;
+      case '-':
+        return num1 - num2;
+      case '*':
+        return num1 * num2;
+      case '/':
+        return num1 / num2;
+      default:
+        return 0;
+    }
+  };
 
-    const calculate = () => {
-        // split the input string into 3 parts (number, operator, number)
-        const parts = input.split(' ');
-        // double checking that 3 parts exist
-        if (parts.length === 3) {
-            const num1 = Number(parts[0]); // First number
-            const operation = parts[1]; // Operator
-            const num2 = Number(parts[2]); // Second number
-            const result = performOperation(operation, num1, num2);
-            setInput(result.toString());
-        } else {
-            // if the input format is incorrect, display an error
-            setInput('Error');
-        }
-    };
+  const calculate = (): void => {
+    const parts = input.split(' ');
+    if (parts.length === 3) {
+      const num1 = Number(parts[0]);
+      const operation = parts[1];
+      const num2 = Number(parts[2]);
+      const result = performOperation(operation, num1, num2);
+      setInput(result.toString());
+    } else {
+      setInput('Error');
+    }
+  };
 
-    const clear = () => setInput('');
+  const clear = (): void => setInput('');
 
-
-    return (
-        <section className="calculator">
-            <form>
-                <input type="text" value={input} readOnly/>
-            </form>
-            <div className="keypad">
-                <button onClick={() => clear()}>AC</button>
-                <button onClick={() => handleClick('+/-')}>+/-</button>
-                <button onClick={() => handleClick('%')}>%</button>
-                <button onClick={() => handleClick('/')}>÷</button>
-                <button onClick={() => handleClick('7')}>7</button>
-                <button onClick={() => handleClick('8')}>8</button>
-                <button onClick={() => handleClick('9')}>9</button>
-                <button onClick={() => handleClick('*')}>×</button>
-                <button onClick={() => handleClick('4')}>4</button>
-                <button onClick={() => handleClick('5')}>5</button>
-                <button onClick={() => handleClick('6')}>6</button>
-                <button onClick={() => handleClick('-')}>-</button>
-                <button onClick={() => handleClick('1')}>1</button>
-                <button onClick={() => handleClick('2')}>2</button>
-                <button onClick={() => handleClick('3')}>3</button>
-                <button onClick={() => handleClick('+')}>+</button>
-                <button className='zero' onClick={() => handleClick('0')}>0</button>
-                <button onClick={() => handleClick('.')}>.</button>
-                <button onClick={() => calculate()}>=</button>
-            </div>
-        </section>
-    );
+  return (
+    <section className="calculator">
+      <form>
+        <input type="text" value={input} readOnly />
+      </form>
+      <div className="keypad">
+        <Button value="AC" onClick={clear} />
+        <Button value="+/-" onClick={handleClick} />
+        <Button value="%" onClick={handleClick} />
+        <Button value="/" onClick={handleClick} />
+        <Button value="7" onClick={handleClick} />
+        <Button value="8" onClick={handleClick} />
+        <Button value="9" onClick={handleClick} />
+        <Button value="*" onClick={handleClick} />
+        <Button value="4" onClick={handleClick} />
+        <Button value="5" onClick={handleClick} />
+        <Button value="6" onClick={handleClick} />
+        <Button value="-" onClick={handleClick} />
+        <Button value="1" onClick={handleClick} />
+        <Button value="2" onClick={handleClick} />
+        <Button value="3" onClick={handleClick} />
+        <Button value="+" onClick={handleClick} />
+        <Button value="0" onClick={handleClick} className="zero" />
+        <Button value="." onClick={handleClick} />
+        <Button value="=" onClick={calculate} />
+      </div>
+    </section>
+  );
 }
