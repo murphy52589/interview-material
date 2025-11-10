@@ -1,0 +1,94 @@
+[
+  {
+    "id": 1,
+    "word": "Vaticinate (v)",
+    "choices": [
+      {
+        "value": "a",
+        "label": "render favourable, conciliate, appease"
+      },
+      {
+        "value": "b",
+        "label": "prophesy"
+      },
+      {
+        "value": "c",
+        "label": "foreshadow, forecast roughly, sketch"
+      },
+      {
+        "value": "d",
+        "label": "weaken, deprive of strength"
+      }
+    ],
+    "correctChoice": "b"
+  },
+  {
+    "id": 2,
+    "word": "Acidulous (adj)",
+    "choices": [
+      {
+        "value": "a",
+        "label": "extraordinarily bad, flagrant"
+      },
+      {
+        "value": "b",
+        "label": "stubbornly resistant to authority, hard to manage"
+      },
+      {
+        "value": "c",
+        "label": "slightly sour or acidic; sharp, caustic (criticism)"
+      },
+      {
+        "value": "d",
+        "label": "glassy, transparent"
+      }
+    ],
+    "correctChoice": "c"
+  },
+  {
+    "id": 3,
+    "word": "Aseptic (adj)",
+    "choices": [
+      {
+        "value": "a",
+        "label": "forbidding, unattractive, stern, fearsome"
+      },
+      {
+        "value": "b",
+        "label": "random, fitful, disconnected, inconsistent"
+      },
+      {
+        "value": "c",
+        "label": "frustrated, upset, angry"
+      },
+      {
+        "value": "d",
+        "label": "surgically clean"
+      }
+    ],
+    "correctChoice": "d"
+  },
+  {
+    "id": 4,
+    "word": "Desolate (adj)",
+    "choices": [
+      {
+        "value": "a",
+        "label": "deserted, bleak, empty"
+      },
+      {
+        "value": "b",
+        "label": "slippery, elusive, hard to grasp"
+      },
+      {
+        "value": "c",
+        "label": "delicate, fragile"
+      },
+      {
+        "value": "d",
+        "label": "cold, frigid"
+      }
+    ],
+    "correctChoice": "a"
+  }
+]

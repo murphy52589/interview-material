@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 
-function App() {
+function Starter() {
   interface Question {
     id: number;
     word: string;
@@ -81,7 +80,7 @@ function App() {
   );
 }
 
-export default App;
+export default Starter;
 
 /* 
 Instructions
